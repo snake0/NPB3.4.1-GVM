@@ -1,25 +1,20 @@
 #!/bin/bash
-run_test(){
-  benchmark=$1
-  ./"${benchmark}".A.xa
-  ./"${benchmark}".A.xb
-  ./"${benchmark}".A.xc
-  ./"${benchmark}".A.y
-  ./"${benchmark}".A.z
-  ./"${benchmark}".A.t
-}
 
 array=(cg ep is sp ua bt dc ft lu mg)
-for benchmark in ${array[@]} ; do 
-  make "${benchmark}" CLASS=A
-  cd bin/
-  cp "${benchmark}".A.x "${benchmark}".A.xa
-  cp "${benchmark}".A.x "${benchmark}".A.xb
-  cp "${benchmark}".A.x "${benchmark}".A.xc
-  cp "${benchmark}".A.x "${benchmark}".A.y
-  cp "${benchmark}".A.x "${benchmark}".A.z
-  cp "${benchmark}".A.x "${benchmark}".A.t
-  rm "${benchmark}".A.x
-  # run_test "${benchmark}" > "${benchmark}".txt
-  cd ..
+sizes=(s w a b c d e f)
+sizes2=(S W A B C D E F)
+
+for size in ${sizes[@]} ; do 
+   cp config/suite.def.${size} config/suite.def
+   make suite -j$(nproc)
 done
+
+for benchmark in ${array[@]} ; do 
+  for size in ${sizes2[@]} ; do 
+    cp bin/${benchmark}.${size}.x bin/${benchmark}.${size}.t
+  done
+done
+
+
+
+
