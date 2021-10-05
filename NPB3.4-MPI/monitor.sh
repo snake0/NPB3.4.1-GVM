@@ -8,8 +8,8 @@ run_bench() {
 	startrx=$(cat /sys/class/net/$interf/statistics/rx_bytes)
 	starttx=$(cat /sys/class/net/$interf/statistics/tx_bytes)
 	
-	mpirun -hostfile host.txt -np 16 --mca btl openib,self,vader /home/sin/NPB3.4.1-GVM/NPB3.4-MPI/bin/${bench}.xy
-
+#	mpirun -hostfile host.txt -np 16 --mca btl openib,self,vader /home/sin/NPB3.4.1-GVM/NPB3.4-MPI/bin/${bench}.xy
+	sleep 2
 	stop=$(date +%s)
 	stoprx=$(cat /sys/class/net/$interf/statistics/rx_bytes)
         stoptx=$(cat /sys/class/net/$interf/statistics/tx_bytes)
