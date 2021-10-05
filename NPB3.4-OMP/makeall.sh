@@ -12,6 +12,7 @@ done
 for benchmark in ${array[@]} ; do 
   for size in ${sizes2[@]} ; do 
     cp bin/${benchmark}.${size}.x bin/${benchmark}.${size}.t
+    cp bin/${benchmark}.${size}.x bin/${benchmark}.${size}.y
   done
 done
 
